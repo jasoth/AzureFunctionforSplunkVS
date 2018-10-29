@@ -128,6 +128,8 @@ namespace AzureFunctionForSplunk
 
         public static bool ValidateMyCert(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslErr)
         {
+            string splunkCertThumbprint = Utils.getEnvironmentVariable("splunkCertThumbprint");
+
             // if user has not configured a cert, anything goes
             if (splunkCertThumbprint == "")
                 return true;
