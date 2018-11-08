@@ -128,6 +128,7 @@ namespace AzureFunctionForSplunk
 
         public static bool ValidateMyCert(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslErr)
         {
+            // The static Util property splunkCertThumbprint was never populated so this line was added to get the environment variable
             string splunkCertThumbprint = Utils.getEnvironmentVariable("splunkCertThumbprint");
 
             // if user has not configured a cert, anything goes
@@ -154,7 +155,7 @@ namespace AzureFunctionForSplunk
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateMyCert);
+            //ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateMyCert);
 
             var newClientContent = new StringBuilder();
             foreach (string item in standardizedEvents)

@@ -35,7 +35,7 @@ namespace AzureFunctionForSplunk
     {
         [FunctionName("EhAadSignInLogsExt")]
         public static async Task Run(
-            [EventHubTrigger("%input-hub-name-aadsignin-logs%", Connection = "hubConnection")]string[] messages,
+            [EventHubTrigger("%input-hub-name-aadsignin-logs%", Connection = "hubConnection", ConsumerGroup = "%hubConsumerGroup%")]string[] messages,
             IBinder blobFaultBinder,
             Binder queueFaultBinder,
             TraceWriter log)
